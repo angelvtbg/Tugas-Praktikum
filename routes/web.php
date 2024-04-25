@@ -21,6 +21,10 @@ Route::get('/', function () {
         'isi_data' => 'Halaman Awal'
     ]);
 });
-Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
-Route::get('/dosen', [DosenController::class, 'dosen']);
+Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('index');
+Route::get('/dosen', [DosenController::class, 'index']);
+
+
+Route::get('/mahasiswa/create', [MahasiswaController::class, 'create'])->name('create');
+Route::POST('/mahasiswa/store', [MahasiswaController::class, 'store']) ->name('store');
 
