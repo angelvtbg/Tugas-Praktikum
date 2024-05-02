@@ -11,6 +11,7 @@
 <body>
     <div class="container">
         <h2 class="mt-4">Form Tambah Data Mahasiswa</h2>
+        
         <form action="{{route('store')}}" method="POST">
             @csrf
             <div class="form-group">
@@ -27,6 +28,11 @@
                 <label for="jurusan">Jurusan:</label>
                 <input type="text" class="form-control" name="jurusan" id="jurusan"  required>
             </div>
+
+            {{-- <div class="form-group">
+                <label for="jurusan">No Identitas:</label>
+                <input type="text" class="form-control"  name="no_identitas" id="noIdentitas" required>
+            </div> --}}
 
             <div class="form-group">
                 <label for="no_identitas">Alamat:</label>

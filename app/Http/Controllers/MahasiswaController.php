@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use App\Models\Ktm;
+
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -36,12 +38,14 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'nim' => 'required|unique:mahasiswa',
             'jurusan' => 'required',
+            // 'no_identitas' => 'required',
             'alamat' => 'required',
         ]);
         $mahasiswa = new Mahasiswa;
         $mahasiswa->nama = $request->nama;
         $mahasiswa->nim = $request->nim;
         $mahasiswa->jurusan = $request->jurusan;
+        // $mahasiswa->ktm->nomor_identitas = $request->nomor_identitas;
         $mahasiswa->alamat = $request->alamat;
         $mahasiswa->save();
         return redirect()->route('index');
@@ -75,6 +79,7 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'nim' => 'required|unique:mahasiswa',
             'jurusan' => 'required',
+            // 'no_identitas' => 'required',
             'alamat' => 'required',
         ]);
 
@@ -82,6 +87,7 @@ class MahasiswaController extends Controller
         $mahasiswa->nama = $request->nama;
         $mahasiswa->nim = $request->nim;
         $mahasiswa->jurusan = $request->jurusan;
+        // $mahasiswa->$ktm->nomor_identitas = $request->nomor_identitas;
         $mahasiswa->alamat = $request->alamat;
         $mahasiswa->save();
         return redirect()->route('index');
@@ -90,8 +96,18 @@ class MahasiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id_mahasiswa)
     {
-        //
+        $mahasiswa = Mahasiswa::find($id_mahasiswa);
+        return view('destroy', [
+            'mahasiswa' => $mahasiswa
+        ]);
+    }
+
+    public function delete(string $id_mahasiswa)
+    {
+        $mahasiswa = Mahasiswa::find($id_mahasiswa);
+        $mahasiswa->delete();
+        return redirect()->route('index');
     }
 }
